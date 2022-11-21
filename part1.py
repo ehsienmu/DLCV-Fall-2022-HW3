@@ -52,7 +52,7 @@ with open(json_path) as f:
 
 
 
-text_inputs = torch.cat([clip.tokenize(f"No {c}, no score") for c in all_classes.values()]).to(device)
+text_inputs = torch.cat([clip.tokenize(f"a photo of a {c}") for c in all_classes.values()]).to(device)
 
 correct_num = 0
 imgfnames, lbs = get_all_image_and_labels(images_data_path)
