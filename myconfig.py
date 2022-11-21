@@ -8,7 +8,7 @@ class Config(object):
         # Epochs
         self.epochs = 30
         # self.lr_drop = 20
-        self.start_epoch = 3
+        self.start_epoch = 0
         self.weight_decay = 1e-4
 
         # Backbone

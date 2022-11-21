@@ -13,9 +13,9 @@ import argparse
 from coco_s import *
 from tqdm import tqdm
 from myconfig import Config
-from torch.cuda.amp import GradScaler, autocast
+# from torch.cuda.amp import GradScaler, autocast
 
-import pdb
+# import pdb
 
 
 def fixed_seed(myseed):
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     # model = Transformer(52, 512, 196, 512, 2048, 2, 8, 8, 8, 30, 0.1, 0)
     model = Transformer(vocab_size=18022, d_model=1024, dec_ff_dim=512,
                         dec_n_layers=6, dec_n_heads=8, max_len=128, dropout=0.1, pad_id=0)
-    load_parameters(model, './1118_0_epoch_2.pt')
+    # load_parameters(model, './1118_0_epoch_2.pt')
 
     for param in model.encoder.parameters():
         param.requires_grad = False
@@ -123,7 +123,7 @@ if __name__ == '__main__':
     criterion = nn.CrossEntropyLoss(
         reduction='mean', ignore_index=pad_id).to(device)
     optimizer = torch.optim.Adam(model.decoder.parameters(), lr=config.lr)
-    scaler = GradScaler()
+    # scaler = GradScaler()
     for epoch in range(config.start_epoch, config.epochs):
 
         epoch_loss = 0.0
@@ -141,25 +141,24 @@ if __name__ == '__main__':
                 # print(caps)
                 images = images.to(device)
                 caps = caps.to(device)
-                with autocast():  # ("cuda", dtype=torch.float16):
+                # with autocast():  # ("cuda", dtype=torch.float16):
                     # output = model(input)
                     # loss = loss_fn(output, target)
-                    logits, _ = model(images, caps[:, :-1])
+                logits, _ = model(images, caps[:, :-1])
                 # loss = criterion(outputs.permute(0, 2, 1), caps[:, 1:])
-                    loss = criterion(
-                        logits.reshape(-1, logits.size()[-1]), caps[:, 1:].reshape(-1))
-                    if (torch.isnan(loss)):
-                        print('found nan!')
-                        pdb.set_trace()
-                        continue
+                loss = criterion(logits.reshape(-1, logits.size()[-1]), caps[:, 1:].reshape(-1))
+                # if (torch.isnan(loss)):
+                #     print('found nan!')
+                #     pdb.set_trace()
+                #     continue
                     # loss = criterion(outputs[0].view(-1, outputs[0].shape[-1]), caps[:,1:].contiguous().view(-1))
                 epoch_loss += loss.item()
                 total_len += 1
-                # loss.backward()image.png
-                # optimizer.step()
-                scaler.scale(loss).backward()
-                scaler.step(optimizer)
-                scaler.update()
+                loss.backward()
+                optimizer.step()
+                # scaler.scale(loss).backward()
+                # scaler.step(optimizer)
+                # scaler.update()
 
                 tepoch.set_postfix(loss=loss.item())
                 # break
