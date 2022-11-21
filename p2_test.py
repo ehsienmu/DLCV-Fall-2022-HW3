@@ -131,7 +131,7 @@ if __name__ == '__main__':
         
         if (args.write_log):
             with open(args.log_path, 'a') as logf:
-                logf.write(img_name + ', ')
+                logf.write(img_name.split('.')[0] + ', ')
         imgs = tfm(Image.open(os.path.join(img_dir, img_name)).convert('RGB')).unsqueeze(0)
         
 
@@ -237,7 +237,7 @@ if __name__ == '__main__':
                 # logf.write(seq_preds + '\n')
                 logf.write(pred_capt[:-2] + pred_capt[-1] + '\n')
         # print(img_name, ':', pred_capt[:-2] + pred_capt[-1])
-        pred_dict[img_name] = pred_capt[:-2] + pred_capt[-1]
+        pred_dict[img_name.split('.')[0]] = pred_capt[:-2] + pred_capt[-1]
 
     # Serializing json
     json_object = json.dumps(pred_dict, indent=4)
