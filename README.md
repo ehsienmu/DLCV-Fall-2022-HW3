@@ -1,4 +1,6 @@
-# Problem list
+# DLCV-Fall-2022-HW3
+
+## Problem list
 
 **Problem 1**: Zero-shot image classification with CLIP (30%)
 
@@ -6,9 +8,12 @@
 
 **Problem 3**: Visualization of Attention in Image Captioning (20%) 
 
-# DLCV-Fall-2022-HW3
+## Slides
 
 Please click [this link](https://docs.google.com/presentation/d/1tza5rtruvOkoComWRS79Yb7IgM_R0pGLyrI4m8Jk5Xg/edit#slide=id.g10278b72a69_0_448) to view the slides of HW3
+
+## Results
+Please click [hw3_r10921a36.pdf](https://github.com/ehsienmu/DLCV-Fall-2022-HW3/blob/main/hw3_r10921a36.pdf)
 
 # Usage
 
