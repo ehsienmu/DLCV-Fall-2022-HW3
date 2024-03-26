@@ -1,5 +1,9 @@
+# Problem list
+
 **Problem 1**: Zero-shot image classification with CLIP (30%)
+
 **Problem 2**: Image Captioning with Vision and Language Model (50%)
+
 **Problem 3**: Visualization of Attention in Image Captioning (20%) 
 
 # DLCV-Fall-2022-HW3
